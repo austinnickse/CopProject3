@@ -28,7 +28,7 @@ void quickSort(vector<weapon>& vec, int low, int high, int choice);
 void swap(int& a, int& b);
 
 void printVector(vector<weapon>& vec);
-void topTen(vector<weapon>& vec);
+void topWeapons(vector<weapon>& vec);
 
 int main() {
 
@@ -175,8 +175,8 @@ int main() {
     cout << "It took " << t << " milliseconds seconds to sort the vector" << endl;
 
 
-    cout << "Sorted Vector:" << endl;
-    topTen(weaponlist);
+    //cout << "Sorted Vector:" << endl;
+    topWeapons(weaponlist);
 
 
     //BELOW IS JUST SO PROGRAM HANGS ON SCREEN SO YOU CAN READ THE RESULTS
@@ -303,9 +303,12 @@ void swap(int& a, int& b) {
     b = num;
 }
 
-void topTen(vector<weapon>& vec) {
-    std::cout << "Top ten weapons\n";
-    for (int i = 1; i <= 10; i++) {
+void topWeapons(vector<weapon>& vec) {
+    int displaynum;
+    std::cout << "How many weapons do you want to display? ";
+    std::cin >> displaynum;
+    std::cout << "\n";
+    for (int i = 1; i <= displaynum; i++) {
         std::cout << i << ": ";
         vec[vec.size() - i].printData();
     }

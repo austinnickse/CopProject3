@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <stdlib.h> //For rand
-#include <fstream>
 #include <ctime>
 #include "Weapon.h"
 
@@ -11,9 +9,6 @@ using namespace std;
 
 //Created by Austin Nickse on 11/28/2023
 //Creates data set for project 3
-
-
-std::vector<std::string> createWeapons();
 
 void initializeWeapons(vector<string> names);
 int totalDamage(weapon cur, int vigor, int mind, int endurance, int strength, int dexterity, int intelligence, int faith, int arcane);
@@ -31,9 +26,7 @@ void printVector(vector<weapon>& vec);
 void topWeapons(vector<weapon>& vec);
 
 int main() {
-
-
-    ifstream myfile("weapon_data3.txt");
+    ifstream myfile("weapon_data3.txt"); //This is the file with the over 100,000 indexes
     string text;
     string word;
     vector<weapon> weaponlist;
@@ -88,7 +81,7 @@ int main() {
     }
 
 
-    int vigor, mind, endurance, strength, dexterity, intelligence, faith, arcane; //user inputs
+    int vigor, mind, endurance, strength, dexterity, intelligence, faith, arcane; //user inputs for levels
     cout << "Enter Vigor Level: " << std::left;
     cin >> vigor;
     cout << "Enter Mind Level: " << std::left;
@@ -110,6 +103,7 @@ int main() {
     int damage;
     //weapon bestWeapon;
     for (int i = 0;  i < weaponlist.size(); i++) {
+        //sets the correct stat scaled for all weapons, then calculates the total damage of the weapon
         weaponlist[i].vigor = weaponlist[i].vigor * vigor;
         weaponlist[i].mind = weaponlist[i].mind * mind;
         weaponlist[i].endurance = weaponlist[i].endurance * endurance;
@@ -122,15 +116,7 @@ int main() {
                              weaponlist[i].strength, weaponlist[i].dexterity,
                              weaponlist[i].intelligence, weaponlist[i].faith, weaponlist[i].arcane);
         weaponlist[i].totalDamage = damage;
-        /* For testing to see if the correct weapon is chosen
-        if (damage > highestDamage) {
-            bestWeapon = weaponlist[i];
-            highestDamage = damage;
-        }
-         */
     }
-    //cout << "Based on your stats, here is the best weapon for you and it's statistics: " << endl;
-    //bestWeapon.printData();
 
 
     string sort;
@@ -159,8 +145,8 @@ int main() {
     //mergeSort(vec, 0, size - 1);
 
     clock_t t;
-    t = clock();
-    if (sort == "q") {
+    t = clock(); //clock starts for timing the sorts
+    if (sort == "q") { //pick which sort
         quickSort(weaponlist,0 , size-1, choice);
     }
     else if (sort == "m") {
@@ -170,7 +156,7 @@ int main() {
         cout << "Invalid input";
         //NEED TO MAKE IT PROMPT FOR SORT METHOD AGAIN
     }
-    t = clock() - t;
+    t = clock() - t; //return actual time
 
     cout << "It took " << t << " milliseconds seconds to sort the vector" << endl;
 
@@ -288,7 +274,7 @@ int partition(vector<weapon>& vec, int low, int high, int choice) //partition ve
 }
 
 void quickSort(vector<weapon>& vec, int low, int high, int choice)
-{
+{ //picks a pivot and preforms quicksort
     if (low < high)
     {
         int pivot = partition(vec, low, high, choice);
@@ -297,13 +283,13 @@ void quickSort(vector<weapon>& vec, int low, int high, int choice)
     }
 }
 
-void swap(int& a, int& b) {
-    int num = a;
+void swap(weapon& a, weapon& b) { //swaps the two indexes
+    weapon num = a;
     a = b;
     b = num;
 }
 
-void topWeapons(vector<weapon>& vec) {
+void topWeapons(vector<weapon>& vec) { //displays the top n weapons
     int displaynum;
     std::cout << "How many weapons do you want to display? ";
     std::cin >> displaynum;

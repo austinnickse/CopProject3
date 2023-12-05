@@ -77,7 +77,7 @@ int main() {
             }
             i++;
         }
-        weaponlist.push_back(cur);
+        weaponlist.push_back(cur); //finally add the weapon to the vector
     }
 
 
@@ -99,9 +99,7 @@ int main() {
     cout << "Enter Arcane Level: " << std::left;
     cin >> arcane;
 
-    //int highestDamage = 0;
     int damage;
-    //weapon bestWeapon;
     for (int i = 0;  i < weaponlist.size(); i++) {
         //sets the correct stat scaled for all weapons, then calculates the total damage of the weapon
         weaponlist[i].vigor = weaponlist[i].vigor * vigor;
@@ -141,8 +139,6 @@ int main() {
 
 
     int size = weaponlist.size();
-    //quickSort(vec, 0, size - 1);
-    //mergeSort(vec, 0, size - 1);
 
     clock_t t;
     t = clock(); //clock starts for timing the sorts
@@ -299,15 +295,6 @@ void topWeapons(vector<weapon>& vec) { //displays the top n weapons
         vec[vec.size() - i].printData();
     }
 }
-
-//print vector function used for testing
-/*
-void printVector(vector<weapon>& vec) {
-    for (int i = 0; i < vec.size(); i++) {
-        vec[i].printData();
-    }
-}
- */
 
 
 
